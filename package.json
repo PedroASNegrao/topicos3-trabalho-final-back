@@ -16,5 +16,11 @@
   "engines": {
     "node": "12.16.1",
     "yarn": "1.22.5"
-  }
+  },
+  "name": "topicos3-trabalho-final-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PedroASNegrao/topicos3-trabalho-final-back.git",
+  "author": "Pedro Augusto de Sousa Negrão <pedron_1997@hotmail.com>",
+  "license": "MIT"
 }
