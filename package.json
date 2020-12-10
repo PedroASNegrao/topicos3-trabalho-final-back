@@ -4,6 +4,10 @@
     "sucrase": "^3.16.0"
   },
   "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.1",
@@ -11,7 +15,8 @@
   },
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "nodemon src/app.js"
+    "start": "node src/app.js",
+    "start2": "node --experimental-modules src/app.js"
   },
   "engines": {
     "node": "12.16.1",
@@ -19,8 +24,9 @@
   },
   "name": "topicos3-trabalho-final-back",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.js",
   "repository": "https://github.com/PedroASNegrao/topicos3-trabalho-final-back.git",
   "author": "Pedro Augusto de Sousa Negrão <pedron_1997@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module"
 }

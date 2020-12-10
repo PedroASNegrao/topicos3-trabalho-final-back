@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
-import Parking from "../models/Parking"
-import conn from "../../config/dbConnection";
+import Parking from "../models/Parking.js"
+import conn from "../../config/dbConnection.js";
 import ParkingSpace from "../models/ParkingSpace.js";
 //import ParkingSpaceController from "./ParkingSpaceController";
 //let parkingSpace = new ParkingSpaceController();

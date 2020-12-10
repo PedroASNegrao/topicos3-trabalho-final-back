@@ -14,4 +14,5 @@ const getParkingLot = async (req, res, next) => {
     }
 }
 
-module.exports = getParkingLot
+//module.exports = getParkingLot
+export default getParkingLot;

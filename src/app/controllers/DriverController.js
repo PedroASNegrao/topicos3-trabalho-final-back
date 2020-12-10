@@ -1,5 +1,5 @@
 import moment from 'moment'
-import Driver from "../models/Driver"
+import Driver from "../models/Driver.js"
 
 class DriverController {
     async index(req, res) {

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
-import Driver from "../models/Driver"
-import conn from "../../config/dbConnection";
+import Driver from "../models/Driver.js"
+import conn from "../../config/dbConnection.js";
 
 mongoose.connect(conn.url);
 autoIncrement.initialize(mongoose);

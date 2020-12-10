@@ -1,9 +1,18 @@
-import { Router } from "express";
+import  Router  from "express";
+//const Router = require('express');
 
-import DriverController from "./app/controllers/DriverController";
-import ParkingController from "./app/controllers/ParkingController";
-import ParkingSpaceController from "./app/controllers/ParkingSpaceController";
+
+import DriverController from "./app/controllers/DriverController.js";
+import ParkingController from "./app/controllers/ParkingController.js";
+import ParkingSpaceController from "./app/controllers/ParkingSpaceController.js";
 import getParkingLot from "./app/middleware/getParkingLot.js"
+
+/*
+const DriverController = require('./app/controllers/DriverController');
+const ParkingController = require('./app/controllers/ParkingController');
+const ParkingSpaceController = require('./app/controllers/ParkingSpaceController');
+const getParkingLot = require('./app/middleware/getParkingLot.js');
+*/
 
 const routes = new Router();
 
@@ -26,9 +35,10 @@ routes.post("/parkingSpace/:parkingLotId/:numberOfSpaces", getParkingLot, Parkin
 routes.get("/driver", DriverController.index);
 routes.post("/driver", DriverController.store);
 routes.put("/driver/:id", DriverController.update);
-routes.delete("/driver/:id", DriverController.delete)
+routes.delete("/driver/:id", DriverController.delete);
 
 export default routes;
+//module.exports = routes;
 
 /*
 routes.post("/driver/arrival/:id", DriverController.arrival)

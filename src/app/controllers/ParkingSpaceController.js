@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
 import ParkingSpace from "../models/ParkingSpace.js"
-import Parking from "../models/Parking"
-import conn from "../../config/dbConnection";
+import Parking from "../models/Parking.js"
+import conn from "../../config/dbConnection.js";
 
 mongoose.connect(conn.url);
 autoIncrement.initialize(mongoose);
