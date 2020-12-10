@@ -127,6 +127,14 @@ class ParkingController {
         if (!req.params.id) {
             return res.status(400).json({ message: "É necessário passar o ID do motorista" })
         }
+        const parkingId = await Parking.findOne({
+            _id: req.params.id
+        })
+
+        if (!parkingId) {
+            return res.status(422).json({ message: "Estacionamento não encontrado" })
+        }
+
         try {
             await ParkingSpace.deleteMany({
                 parkingLot_id: req.params.id

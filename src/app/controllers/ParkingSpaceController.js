@@ -18,20 +18,54 @@ class ParkingSpaceController {
         }
     }
 
-    async storeMany(qdt, id) {
-        for (var i = 0; i <= qdt; i++) {
-            var parkingSpace = new ParkingSpace({
-                isFree: true,
-                numericID: i+1,
-                parkingLot_id: id,
-                history: [],
-            })
-            console.log(parkingSpace)
-            await ParkingSpace.create(parkingSpace)
+    async update(req, res){
+        if(!req.params.id){
+            return res.status(400).json({ message: "É necessário passar o ID da vaga" })
         }
+
+        const parkingSpaceToUpdate = await ParkingSpace.findOne({
+            _id: req.params.id
+        })
+
+        if (!parkingSpaceToUpdate) {
+            return res.status(422).json({ message: "vaga não encontrada" })
+        }
+
+        try {
+            await ParkingSpace.findOneAndUpdate({_id: req.params.id}, {$push: {history: req.body.history[0]}}, {
+                next: true
+            })
+
+        } catch (error) {
+            return res.status(500).json({ message: `Erro no servidor! ${error}` })
+        }
+
+        return res.status(200).json({ message: "Dados da vaga atualizados com sucesso" })
 
     }
 
+    async delete(req, res){
+        if(!req.params.id){
+            return res.status(400).json({ message: "É necessário passar o ID da vaga" })
+        }
+
+        const parkingSpaceToUpdate = await ParkingSpace.findOne({
+            _id: req.params.id
+        })
+
+        if (!parkingSpaceToUpdate) {
+            return res.status(422).json({ message: "vaga não encontrada" })
+        }
+
+        try {
+            await ParkingSpace.deleteOne({_id: req.params.id})
+
+        } catch (error) {
+            return res.status(500).json({ message: `Erro no servidor! ${error}` })
+        }
+
+        return res.status(200).json({ message: "Vaga deletada com sucesso" })
+    }
 
     /*
         async storeMany(req, res) {
