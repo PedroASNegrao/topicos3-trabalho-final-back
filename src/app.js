@@ -14,7 +14,7 @@ class App {
         this.app = express();
         this.middlewares(); /* Declarar o muddlwares antes das rotas! */
         this.routes();
-        this.app.listen(process.env.PORT || 5000);
+        this.app.listen(process.env.PORT || 5050);
     }
 
     middlewares() {
