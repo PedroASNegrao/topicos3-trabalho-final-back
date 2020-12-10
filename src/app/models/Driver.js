@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
 
-import conn from "../../config/dbConnection";
+import conn from "../../config/dbConnection.js";
 
 mongoose.connect(conn.url);
 autoIncrement.initialize(mongoose);
@@ -16,10 +16,6 @@ const DriverSchema = new mongoose.Schema(
             licensePlate: String,
             brand: String
         }],
-        /*licensePlate: {
-            type: String,
-            required: true
-        },*/
         cpf: {
             type: String,
             required: true
@@ -36,12 +32,6 @@ const DriverSchema = new mongoose.Schema(
             type: Boolean,
             required: true
         },
-        /*       arrivalTime: {
-                   type: Date
-               },
-               departureTime: {
-                   type: Date
-               }*/
     },
     {
         versionKey: false,

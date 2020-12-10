@@ -1,5 +1,5 @@
 import moment from 'moment'
-import Driver from "../models/Driver"
+import Driver from "../models/Driver.js"
 
 class DriverController {
     async index(req, res) {
@@ -21,13 +21,12 @@ class DriverController {
             return res.status(400).json({ message: "Motorista já está cadastrado" })
         }
 
-        if (!(name && cars && cpf && email && password && deficiency)) {
-            return res.status(422).json({ message: "Nome, Placa do Carro, CPF, Email, Senha e Informação de deficiência são obrigatórios" })
+        if (!(name && cars && cpf && email && password) || (deficiency == null)) {
+            return res.status(422).json({ message: "Nome, CPF, Email, Senha e Informação de deficiência são obrigatórios" })
         }
-
+        
         try {
             const driver = await Driver.create(req.body)
-
             return res.status(201).json(driver)
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
@@ -48,8 +47,9 @@ class DriverController {
         }
 
         try {
-            await Driver.update(req.body)
-
+            await Driver.findOneAndUpdate({_id: req.params.id}, {$push: {cars: req.body.cars[0]}}, {
+                next: true
+            })
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
         }
