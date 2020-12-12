@@ -24,7 +24,7 @@ class DriverController {
         if (!(name && cars && cpf && email && password) || (deficiency == null)) {
             return res.status(422).json({ message: "Nome, CPF, Email, Senha e Informação de deficiência são obrigatórios" })
         }
-        
+
         try {
             const driver = await Driver.create(req.body)
             return res.status(201).json(driver)
@@ -47,7 +47,7 @@ class DriverController {
         }
 
         try {
-            await Driver.findOneAndUpdate({_id: req.params.id}, {$push: {cars: req.body.cars[0]}}, {
+            await Driver.findOneAndUpdate({ _id: req.params.id }, { $push: { cars: req.body.cars[0] } }, {
                 next: true
             })
         } catch (error) {
@@ -70,6 +70,29 @@ class DriverController {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
         }
         return res.json({ message: "O motorista foi excluído" })
+    }
+
+    async login(req, res) {
+        console.log('login')
+        //try {
+        console.log(req.driver)
+        const driver = req.driver
+        const token = await driver.generateAuthToken()
+        res.send({ driver, token })
+        //}/* catch (err) {
+        //res.status(400).send()
+    }
+
+    async logout(req, res) {
+        try {
+            req.driver.tokens = req.driver.tokens.filter((token) => {
+                return token.token != req.token
+            })
+            await req.driver.save()
+            res.send()
+        } catch (error) {
+            res.status(500).send()
+        }
     }
 
     async arrival(req, res) {

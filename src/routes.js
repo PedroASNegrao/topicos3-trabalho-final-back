@@ -1,4 +1,4 @@
-import  Router  from "express";
+import Router from "express";
 //const Router = require('express');
 
 
@@ -6,6 +6,8 @@ import DriverController from "./app/controllers/DriverController.js";
 import ParkingController from "./app/controllers/ParkingController.js";
 import ParkingSpaceController from "./app/controllers/ParkingSpaceController.js";
 import getParkingLot from "./app/middleware/getParkingLot.js"
+import findByCredentials from "./app/middleware/findByCredentials.js"
+import auth from "./app/middleware/auth.js"
 
 /*
 const DriverController = require('./app/controllers/DriverController');
@@ -33,10 +35,12 @@ routes.delete("/parkingSpace/:id", ParkingSpaceController.delete);
 //routes.put("/parkingSpace/:parkingLotId
 
 //driver
-routes.get("/driver", DriverController.index);
+routes.get("/driver", auth, DriverController.index);
 routes.post("/driver", DriverController.store);
-routes.put("/driver/:id", DriverController.update);
-routes.delete("/driver/:id", DriverController.delete);
+routes.post("/driver/login", findByCredentials, DriverController.login)
+routes.post("/driver/logout", auth, DriverController.logout)
+routes.put("/driver/:id", auth, DriverController.update);
+routes.delete("/driver/:id", auth, DriverController.delete);
 
 export default routes;
 //module.exports = routes;
