@@ -32,6 +32,7 @@ routes.delete("/parkingLot/:id", ParkingController.delete);
 routes.put("/parkingSpace/:id", ParkingSpaceController.update);
 routes.delete("/parkingSpace/:id", ParkingSpaceController.delete);
 routes.get("/parkingSpace/:parkingLotId", ParkingSpaceController.index)
+routes.patch("/parkingSpace/:parkingSpaceId", ParkingSpaceController.isFreeUpdate)
 //routes.put("routes.post("/parkingSpace/:parkingLotId/
 //routes.put("/parkingSpace/:parkingLotId
 
