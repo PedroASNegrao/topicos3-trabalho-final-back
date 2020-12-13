@@ -11,6 +11,16 @@ class DriverController {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
         }
     }
+    
+    async indexDriver(req, res){
+        try {
+            const driver = await Driver.findOne({ _id: req.params.id })
+            return res.status(200).json(driver)
+        }
+        catch (error) {
+            return res.status(500).json({ message: `Erro no servidor! ${error}` })
+        }
+    }
 
     async store(req, res) {
         const { name, cars, cpf, email, password, deficiency } = req.body

@@ -63,7 +63,6 @@ DriverSchema.pre('save', async function (next) {
     next()
 })
 
-
 DriverSchema.methods.generateAuthToken = async function () {
     const driver = this
     const token = jwt.sign({ _id: driver._id.toString() }, 'PARKINGLOT')

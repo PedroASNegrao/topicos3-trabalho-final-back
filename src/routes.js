@@ -38,6 +38,7 @@ routes.patch("/parkingSpace/:id", ParkingSpaceController.isFreeUpdate)
 
 //driver
 routes.get("/driver", auth, DriverController.index);
+routes.get("/driver/:id", auth, DriverController.indexDriver);
 routes.post("/driver", DriverController.store);
 routes.post("/driver/login", findByCredentials, DriverController.login)
 routes.post("/driver/logout", auth, DriverController.logout)
