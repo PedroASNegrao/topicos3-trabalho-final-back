@@ -1,6 +1,7 @@
 
 import express from "express";
-import routes from "./routes.js"
+import routes from "./routes.js";
+import cors from "cors";
 //import "./database";
 
 /*
@@ -11,6 +12,7 @@ const path = require('path');
 */
 class App {
     constructor() {
+        this.app = cors();
         this.app = express();
         this.middlewares(); /* Declarar o muddlwares antes das rotas! */
         this.routes();
@@ -19,6 +21,7 @@ class App {
 
     middlewares() {
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     routes() {
