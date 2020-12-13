@@ -9,17 +9,18 @@ autoIncrement.initialize(mongoose);
 
 class ParkingSpaceController {
     async index(req, res) {
+        const { id } = req.params.parkingLotId
         try {
-            const parkingPlace = await ParkingSpace.findOne()//{ parkingLot.id: req.params.id })
+            const parkingLot = await ParkingSpace.find({ parkingLotId: id })
 
-            return res.status(200).json(parkingPlace)
+            return res.status(200).json(parkingLot)
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
         }
     }
 
-    async update(req, res){
-        if(!req.params.id){
+    async update(req, res) {
+        if (!req.params.id) {
             return res.status(400).json({ message: "É necessário passar o ID da vaga" })
         }
 
@@ -32,7 +33,7 @@ class ParkingSpaceController {
         }
 
         try {
-            await ParkingSpace.findOneAndUpdate({_id: req.params.id}, {$push: {history: req.body.history[0]}}, {
+            await ParkingSpace.findOneAndUpdate({ _id: req.params.id }, { $push: { history: req.body.history[0] } }, {
                 next: true
             })
 
@@ -44,8 +45,8 @@ class ParkingSpaceController {
 
     }
 
-    async delete(req, res){
-        if(!req.params.id){
+    async delete(req, res) {
+        if (!req.params.id) {
             return res.status(400).json({ message: "É necessário passar o ID da vaga" })
         }
 
@@ -58,7 +59,7 @@ class ParkingSpaceController {
         }
 
         try {
-            await ParkingSpace.deleteOne({_id: req.params.id})
+            await ParkingSpace.deleteOne({ _id: req.params.id })
 
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })

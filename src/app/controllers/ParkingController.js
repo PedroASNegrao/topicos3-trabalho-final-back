@@ -21,9 +21,7 @@ class ParkingController {
     }
 
     async store(req, res) {
-        console.log('entrou')
         const { name, parkingSpacesTotal, parkingSpacesOccupied } = req.body
-        console.log('entrou')
 
         const parking = await Parking.findOne({ _id: req.params.id }).select('-_id')
 
@@ -41,17 +39,17 @@ class ParkingController {
             const parking = await Parking.create(req.body)
 
             //cria todas as vagas do estacionamento
-            for (var i = 0; i <= parkingSpacesTotal-1; i++) {
+            for (var i = 0; i <= parkingSpacesTotal - 1; i++) {
                 var parkingSpace = new ParkingSpace({
                     isFree: true,
-                    numericID: i+1,
+                    numericID: i + 1,
                     parkingLot_id: parking._id,
                     history: [],
                 })
                 console.log(parkingSpace)
                 await ParkingSpace.create(parkingSpace)
             }
-            
+
 
             return res.status(201).json(parking)
         } catch (error) {
@@ -110,13 +108,13 @@ class ParkingController {
 
             var parkingSpace = new ParkingSpace({
                 isFree: true,
-                numericID: parkingSpaces.length+1,
+                numericID: parkingSpaces.length + 1,
                 parkingLot_id: req.params.id,
                 history: [],
             })
             console.log(parkingSpace)
             await ParkingSpace.create(parkingSpace)
-            
+
             return res.status(200).json({ message: "Vaga Criada!" })
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
@@ -156,7 +154,7 @@ class ParkingController {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
         }
     }
- 
+
 
 }
 /*

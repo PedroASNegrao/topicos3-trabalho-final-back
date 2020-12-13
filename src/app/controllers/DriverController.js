@@ -73,9 +73,7 @@ class DriverController {
     }
 
     async login(req, res) {
-        console.log('login')
         //try {
-        console.log(req.driver)
         const driver = req.driver
         const token = await driver.generateAuthToken()
         res.send({ driver, token })

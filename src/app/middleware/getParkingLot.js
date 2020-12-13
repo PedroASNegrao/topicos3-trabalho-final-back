@@ -4,7 +4,6 @@ const getParkingLot = async (req, res, next) => {
 
     try {
         const parkingLot = await Parking.findOne({ _id: req.params.parkingLotId })
-        console.log(parkingLot)
         req.parkingLot = parkingLot
 
         next()
