@@ -31,13 +31,14 @@ routes.delete("/parkingLot/:id", ParkingController.delete);
 //parkingSpace
 routes.put("/parkingSpace/:id", ParkingSpaceController.update);
 routes.delete("/parkingSpace/:id", ParkingSpaceController.delete);
-routes.get("/parkingSpace/:parkingLotId", ParkingSpaceController.index)
-routes.patch("/parkingSpace/:parkingSpaceId", ParkingSpaceController.isFreeUpdate)
+routes.get("/parkingSpace/:id", ParkingSpaceController.index)
+routes.patch("/parkingSpace/:id", ParkingSpaceController.isFreeUpdate)
 //routes.put("routes.post("/parkingSpace/:parkingLotId/
 //routes.put("/parkingSpace/:parkingLotId
 
 //driver
 routes.get("/driver", auth, DriverController.index);
+routes.get("/driver/:id", auth, DriverController.indexDriver);
 routes.post("/driver", DriverController.store);
 routes.post("/driver/login", findByCredentials, DriverController.login)
 routes.post("/driver/logout", auth, DriverController.logout)

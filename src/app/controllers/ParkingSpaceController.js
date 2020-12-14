@@ -9,9 +9,8 @@ autoIncrement.initialize(mongoose);
 
 class ParkingSpaceController {
     async index(req, res) {
-        const { id } = req.params.parkingLotId
         try {
-            const parkingLot = await ParkingSpace.find({ parkingLotId: id })
+            const parkingLot = await ParkingSpace.find({ _id: req.params.id })
 
             return res.status(200).json(parkingLot)
         } catch (error) {
@@ -46,6 +45,7 @@ class ParkingSpaceController {
     }
 
     async delete(req, res) {
+
         if (!req.params.id) {
             return res.status(400).json({ message: "É necessário passar o ID da vaga" })
         }
@@ -69,12 +69,13 @@ class ParkingSpaceController {
     }
 
     async isFreeUpdate(req, res) {
-        if (!req.params.parkingSpaceId) {
+
+        if (!req.params.id) {
             return res.status(400).json({ message: "É necessário passar o ID da vaga" })
         }
 
         const parkingSpaceToUpdate = await ParkingSpace.findOne({
-            _id: req.params.parkingSpaceId
+            _id: req.params.id
         })
 
         if (!parkingSpaceToUpdate) {
@@ -82,7 +83,7 @@ class ParkingSpaceController {
         }
 
         try {
-            await ParkingSpace.findOneAndUpdate({ _id: req.params.parkingSpaceId }, { isFree: false }, { new: true })
+            await ParkingSpace.findOneAndUpdate({ _id: req.params.id }, { isFree: req.body.isFree }, { new: true })
 
         } catch (error) {
             return res.status(500).json({ message: `Erro no servidor! ${error}` })
